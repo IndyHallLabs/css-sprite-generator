@@ -1,11 +1,85 @@
 <?php
+/**
+ * Copyright (c) 2008, Chris Morrell
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ * 
+ *  - Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ * 
+ *  - Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ * 
+ *  - Neither the name of Chris Morrell nor the names of its
+ *    contributors may be used to endorse or promote products derived from this
+ *    software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * 
+ * @category  Utilities
+ * @package   SpriteGenerator
+ * @copyright Copyright (c) 2008 Chris Morrell
+ * @author    Saul Rosenbaum / visualchutzpah.com
+ * @author    Chris Morrell / cmorrell.com
+ * @license   New BSD (see above)
+ */
 
 /**
- * Generates CSS Sprites
+ * CSS Sprite Generator Class
  * 
- * @author Saul Rosenbaum / visualchutzpah.com
- * @author Chris Morrell / cmorrell.com
- *
+ * Generates CSS sprite pairs either based on an array of pairs or from a
+ * directory based on filename rules.  Two examples:
+ * 
+ * <code>
+ * <?php
+ * require 'SpriteGenerator.php';
+ * $sg = new SpriteGenerator(array(array('file1.gif'), array('file1b.gif'));
+ * $sg->batchSprites();
+ * ?>
+ * </code>
+ * 
+ * The above code will overwrite file1.gif with a image containing file1.gif
+ * and file1b.gif vertically stacked.
+ * 
+ * <code>
+ * <?php
+ * require 'SpriteGenerator.php';
+ * $sg = new SpriteGenerator('./images/');
+ * $sg->batchSprites();
+ * ?>
+ * </code>
+ * 
+ * The above code will parse ./images/ and create sprites on using file.ext and
+ * file_over.ext (for example file1.gif and file1_over.gif will be converted to
+ * file1.gif).
+ * 
+ * If you would like to use a different matching method, pass a regular expression
+ * as the $match1 and $match2 variables.  The first substring match is the filename
+ * base (in the above example "file1") and the second substring match is the extension
+ * (in the above example "gif").  If you'd rather use something like "myfile-a.gif" and
+ * "myfile-b.gif" you could use the following two regular expressions:
+ * 
+ *  - Match 1: /^([a-z0-9]+)-a\.(jpg|jpeg|jpe|png|gif)$/i
+ *  - Match 2: /^([a-z0-9]+)-b\.(jpg|jpeg|jpe|png|gif)$/i
+ * 
+ * @category  Utilities
+ * @package   SpriteGenerator
+ * @copyright Copyright (c) 2008 Chris Morrell
+ * @author    Saul Rosenbaum / visualchutzpah.com
+ * @author    Chris Morrell / cmorrell.com
+ * @license   New BSD (see above)
  */
 class SpriteGenerator
 {

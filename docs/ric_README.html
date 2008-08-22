@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title></title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<h1 align="center">README</h1>
+<pre>
+
+
+         
+         Sprite Generator v01
+         Quick Notes:
+         
+         Authors:
+
+         Saul Rosenbaum / visualchutzpah.com
+         Chris Morrell / cmorrell.com
+         
+         
+         This is a quick little utility to take some of the pain out of
+         stitching together graphics for use as css-sprites it was conceived
+         to fit a specific workflow. The class is nicely commented, 
+         read on for a quick overview.
+         
+         
+         To utilize it follow the simple steps below: 
+         
+         1. As you normally would create a folder of individual
+            graphics that represent the states of your graphics. 
+         
+         2. Designate your over-state with '_over' so if your neutral state was 'home.gif' 
+            it's corresponding over state would be 'home_over.gif' [likewise if
+            you want to change this default behavior you can pass your own
+            pattern to the SpriteGenerator constructor - see line 37 of the
+            class for the expected arguments]
+            
+            Example:
+                  working_directory
+                     spriteGen.php
+                     images
+                        a00.png
+                        a00_over.png                        
+                        a01.png
+                        a01_over.png                        
+                        
+         3. MAKE A COPY YOUR GRAPHICS - this class consumes the individual graphics, 
+            We fully reccomend you work on copies of your images
+
+         4. Pass the directory path containing your individual graphics to the class [line 190]
+            $sg = new SpriteGenerator(&quot;./images/&quot;); 
+            If all has gone as expected you should now have:
+          
+            Results:
+                  working_directory
+                     spriteGen.php
+                     images
+                        a00.png
+                        a01.png
+
+            Where a00.png is a combined image of a00.png and a00_over.png stitched together vertically.
+         
+            Notes on Color Space:
+            The class can deal with any 'web-friendly' format of graphic - in regards to stitching gifs - 
+            if both states don't share the same color palette you may get some artifacts where the palette 
+            of the overstate gets remapped to the palette of the neutral state, I'm sure it's addressable 
+            programatically but working with pngs and outputting as gifs is a simple enough solution.
+            
+                        
+            Possible Enhancements:
+            -  The most obvious one is support for a variable number of states.
+            -  The addition of a vertical offset variable - we didn't need it but adding it 
+               to the generateSprite method would be simple.
+            -  I suppose there are situations when you want to work horizontally rather than vertically - 
+               but I can't imagine what they may be.
+            -  Some type of GUI front-end to make this process drag and drop from the desktop
+               (perhaps via PHP-GTK).
+             
+            
+            Additional Info:
+            - info on css-sprites can be found here: http://www.alistapart.com/articles/sprites
+            - info on the benefits of reducing http requests canbe found here: http://yuiblog.com/blog/2006/11/28/performance-research-part-1/
+            
+            
+            
+            
+            
+</pre>
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 22 Aug 2008 11:59:00 -0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.0</a>
+	</p>
+	</body>
+</html>
